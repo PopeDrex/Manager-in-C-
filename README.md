@@ -1,2 +1,2 @@
-# Manager-in-C-
+# Manager-in-C#
 Password Manager in C#
