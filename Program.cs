@@ -210,7 +210,7 @@ namespace NotesForm
 
     public static class JSONUtility
     {
-        private static readonly string Key = "WnwEdpCqxkw/xQTPn4fhLg=="; // 16-char key for AES
+        private static readonly string Key = "123456789987654321"; // 16-char key for AES
         private static string GetFilePath(string fileName) => $"{fileName}.json";
 
         public static Dictionary<string, string> LoadDictionary(string fileName)
