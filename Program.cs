@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace NotesForm
 {
@@ -14,39 +15,91 @@ namespace NotesForm
         private TextBox txtTitle;
         private TextBox txtContent;
         private ListBox listBox;
-        private Button btnView;
+        private Button btnView, btnAdd, btnDelete, btnGenerate;
+        private CheckBox chkShowPassword;
+        private NumericUpDown numPasswordLength;
+        private PictureBox logoPictureBox;
 
         public MainForm()
         {
-            this.Text = "Password Application";
+            this.Text = "Password Manager";
+            this.Icon = new Icon("icon.ico");
             this.Width = 600;
-            this.Height = 600;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.MaximizeBox = true;
+            this.Height = 500;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.BackColor = Color.FromArgb(45, 45, 48);
+            this.ForeColor = Color.White;
 
-            txtTitle = new TextBox() { Top = 10, Left = 10, Width = 560, Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right };
-            txtContent = new TextBox() { Top = 40, Left = 10, Width = 560, Height = 100, Multiline = true, Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right };
-            listBox = new ListBox() { Top = 150, Left = 10, Width = 560, Height = 200, Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom };
+            logoPictureBox = new PictureBox()
+            {
+                Size = new Size(167, 115),
+                Location = new Point(1, 1),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                BackColor = Color.Transparent
+            };
+            try
+            {
+                logoPictureBox.Image = Image.FromFile("logo.png"); 
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Logo image not found.");
+            }
+            this.Controls.Add(logoPictureBox);
 
-            Button btnAdd = new Button() { Text = "Add Password", Top = 370, Left = 10, Width = 105 };
+            TableLayoutPanel layout = new TableLayoutPanel()
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 3,
+                RowCount = 8,
+                AutoSize = true,
+                BackColor = Color.FromArgb(30, 30, 30)
+            };
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30));
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50));
+            layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+
+            Label lblTitle = new Label() { Text = "Title:", Anchor = AnchorStyles.Left, ForeColor = Color.White };
+            txtTitle = new TextBox() { Dock = DockStyle.Fill, BackColor = Color.Black, ForeColor = Color.White };
+            Label lblContent = new Label() { Text = "Password:", Anchor = AnchorStyles.Left, ForeColor = Color.White };
+            txtContent = new TextBox() { Dock = DockStyle.Fill, PasswordChar = '*', BackColor = Color.Black, ForeColor = Color.White };
+
+            chkShowPassword = new CheckBox() { Text = "Show Password", ForeColor = Color.White, AutoSize = true };
+            chkShowPassword.CheckedChanged += (s, e) => txtContent.PasswordChar = chkShowPassword.Checked ? '\0' : '*';
+
+            btnGenerate = new Button() { Text = "Generate Password", BackColor = Color.FromArgb(255, 165, 0), ForeColor = Color.White, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+            btnGenerate.Click += (s, e) => txtContent.Text = GeneratePassword((int)numPasswordLength.Value);
+
+            numPasswordLength = new NumericUpDown() { Minimum = 4, Maximum = 32, Value = 12, ForeColor = Color.White, BackColor = Color.Black, Width = 50 };
+
+            listBox = new ListBox() { Dock = DockStyle.Fill, Height = 150, BackColor = Color.Black, ForeColor = Color.White };
+
+            btnAdd = new Button() { Text = "Add Password", BackColor = Color.FromArgb(70, 130, 180), ForeColor = Color.White, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
             btnAdd.Click += (s, e) => AddNote();
 
-            Button btnDelete = new Button() { Text = "Delete Password", Top = 370, Left = 120, Width = 105 };
+            btnDelete = new Button() { Text = "Delete Password", BackColor = Color.FromArgb(178, 34, 34), ForeColor = Color.White, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
             btnDelete.Click += (s, e) => DeleteNote();
 
-            btnView = new Button() { Text = "View Password", Top = 370, Left = 230, Width = 105 };
+            btnView = new Button() { Text = "View Password", BackColor = Color.FromArgb(34, 139, 34), ForeColor = Color.White, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
             btnView.Click += (s, e) => ViewNote();
 
-            Controls.Add(txtTitle);
-            Controls.Add(txtContent);
-            Controls.Add(listBox);
-            Controls.Add(btnAdd);
-            Controls.Add(btnDelete);
-            Controls.Add(btnView);
+            layout.Controls.Add(lblTitle, 0, 0);
+            layout.Controls.Add(txtTitle, 1, 0);
+            layout.Controls.Add(lblContent, 0, 1);
+            layout.Controls.Add(txtContent, 1, 1);
+            layout.Controls.Add(chkShowPassword, 1, 2);
+            layout.Controls.Add(btnGenerate, 1, 3);
+            layout.Controls.Add(numPasswordLength, 2, 3);
+            layout.Controls.Add(listBox, 0, 4);
+            layout.SetColumnSpan(listBox, 3);
+            layout.Controls.Add(btnAdd, 0, 5);
+            layout.Controls.Add(btnDelete, 1, 5);
+            layout.Controls.Add(btnView, 0, 6);
 
+            Controls.Add(layout);
             LoadNotes();
         }
-
         public class Note
         {
             public string Title { get; set; }
@@ -92,6 +145,22 @@ namespace NotesForm
             }
         }
 
+        private string GeneratePassword(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+            StringBuilder password = new StringBuilder();
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            {
+                byte[] buffer = new byte[length];
+                rng.GetBytes(buffer);
+                for (int i = 0; i < length; i++)
+                {
+                    password.Append(chars[buffer[i] % chars.Length]);
+                }
+            }
+            return password.ToString();
+        }
+
         private void DeleteNote()
         {
             if (listBox.SelectedItem is Note selectedNote)
@@ -110,11 +179,15 @@ namespace NotesForm
         {
             if (listBox.SelectedItem is Note selectedNote)
             {
-                MessageBox.Show($"Title: {selectedNote.Title}\n\nContent:\n{selectedNote.Content}", "View Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show($"Title: {selectedNote.Title}\n\nPassword: {selectedNote.Content}\n\nCopy to clipboard?", "View Password", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                {
+                    Clipboard.SetText(selectedNote.Content);
+                }
             }
             else
             {
-                MessageBox.Show("Please select a Password to view.");
+                MessageBox.Show("Please select a password to view.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -137,7 +210,7 @@ namespace NotesForm
 
     public static class JSONUtility
     {
-        private static readonly string Key = "1234567812345678"; // 16-char key for AES
+        private static readonly string Key = "WnwEdpCqxkw/xQTPn4fhLg=="; // 16-char key for AES
         private static string GetFilePath(string fileName) => $"{fileName}.json";
 
         public static Dictionary<string, string> LoadDictionary(string fileName)
