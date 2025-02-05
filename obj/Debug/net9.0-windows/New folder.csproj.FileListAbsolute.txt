@@ -1,0 +1,14 @@
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\New folder.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\New folder.AssemblyInfoInputs.cache
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\New folder.AssemblyInfo.cs
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\New folder.csproj.CoreCompileInputs.cache
+C:\Users\Ean_M\Desktop\C#\New folder\bin\Debug\net9.0-windows\New folder.exe
+C:\Users\Ean_M\Desktop\C#\New folder\bin\Debug\net9.0-windows\New folder.deps.json
+C:\Users\Ean_M\Desktop\C#\New folder\bin\Debug\net9.0-windows\New folder.runtimeconfig.json
+C:\Users\Ean_M\Desktop\C#\New folder\bin\Debug\net9.0-windows\New folder.dll
+C:\Users\Ean_M\Desktop\C#\New folder\bin\Debug\net9.0-windows\New folder.pdb
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\New folder.dll
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\refint\New folder.dll
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\New folder.pdb
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\New folder.genruntimeconfig.cache
+C:\Users\Ean_M\Desktop\C#\New folder\obj\Debug\net9.0-windows\ref\New folder.dll
