@@ -1,9 +1,17 @@
-namespace New_folder;
+namespace PassMan;
 
 public partial class Form1 : Form
 {
     public Form1()
+{
+    InitializeComponent();
+
+    string iconPath = Path.Combine(Application.StartupPath, "icon.ico");
+    if (File.Exists(iconPath))
     {
-        InitializeComponent();
+        this.Icon = new Icon(iconPath);
     }
+    
+} 
+
 }
