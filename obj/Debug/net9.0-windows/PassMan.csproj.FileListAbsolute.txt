@@ -1,0 +1,15 @@
+C:\Users\Ean_M\Desktop\C#\PassMan\bin\Debug\net9.0-windows\PassMan.exe
+C:\Users\Ean_M\Desktop\C#\PassMan\bin\Debug\net9.0-windows\PassMan.deps.json
+C:\Users\Ean_M\Desktop\C#\PassMan\bin\Debug\net9.0-windows\PassMan.runtimeconfig.json
+C:\Users\Ean_M\Desktop\C#\PassMan\bin\Debug\net9.0-windows\PassMan.dll
+C:\Users\Ean_M\Desktop\C#\PassMan\bin\Debug\net9.0-windows\PassMan.pdb
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\PassMan.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\PassMan.AssemblyInfoInputs.cache
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\PassMan.AssemblyInfo.cs
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\PassMan.csproj.CoreCompileInputs.cache
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\PassMan.dll
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\refint\PassMan.dll
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\PassMan.pdb
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\PassMan.genruntimeconfig.cache
+C:\Users\Ean_M\Desktop\C#\PassMan\obj\Debug\net9.0-windows\ref\PassMan.dll
+C:\Users\Ean_M\Desktop\C#\PassMan\bin\Debug\net9.0-windows\icon.ico
