@@ -7,3 +7,9 @@ keep files in folder together or it wont't start, it will create a file called "
 
 
 ![Skjermbilde 2025-02-05 082637](https://github.com/user-attachments/assets/c62601e6-ac85-4fef-9148-36e5aa3a552d)
+
+New update Version 0.5 - - 
+* With New UI, 
+* Changable Background Music and Logo Image
+
+![Skjermbilde 2025-02-08 082638](https://github.com/user-attachments/assets/4c0336bf-fe82-47a4-9787-81bbe297cc29)
