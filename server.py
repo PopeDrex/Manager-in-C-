@@ -53,7 +53,7 @@ def save_notes(notes):
     with open(NOTES_FILE, 'w') as file:
         json.dump(encrypted_notes, file)
 
-@app.route('/api/notes', methods=['POST'])
+@app.route('/', methods=['POST'])
 def save_notes_endpoint():
     try:
         notes = request.json
@@ -64,7 +64,7 @@ def save_notes_endpoint():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/api/notes', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_notes_endpoint():
     try:
         notes = load_notes()
